@@ -1,13 +1,28 @@
 import React from 'react';
+import AnimalList from './components/AnimalList';
 import './App.css';
-import { access } from 'fs';
+import SearchPage from './components/SearchPage';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       animals: [],
+      saved: [],
     }
+  }
+  componentDidMount() {
+    fetch('https://api.petfinder.com/v2/animals', {
+      headers: {
+        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVjMWE4ZjRkMDA2MTVkNDA2YWQyNjQwMmE2YTVjYTk1NmNjMmVjNDljYjEwNmI5NjUxZmU3M2I4YzgyYmQzODkyM2QzNWVjODJiZWE3NmE2In0.eyJhdWQiOiJTUU96bjlRRUhZUkRsRXAzenphbnNNOWFaSmhwYTNLbFdIMFlTM0RONHQ2R1lYS3czdCIsImp0aSI6ImVjMWE4ZjRkMDA2MTVkNDA2YWQyNjQwMmE2YTVjYTk1NmNjMmVjNDljYjEwNmI5NjUxZmU3M2I4YzgyYmQzODkyM2QzNWVjODJiZWE3NmE2IiwiaWF0IjoxNTYwNDU1MDQ5LCJuYmYiOjE1NjA0NTUwNDksImV4cCI6MTU2MDQ1ODY0OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.GNuyNdT8Bd6St3YeXc0gzUmkJUJUnpU4Aqiadfiai8PJ2qGS_jNXXl1kwPiPrJ3k3J2DROlO93Kfd56YTB1bc-fibQuCyINDdSH8Zu1aX4BDiI12ML7SIw1CGQWP9fkz98d2NNwJoO7xcCEUhEc4vndwFR1exg2IpLsmd5BvgLCDcAtyulfMFjqP1pr4-Y6FIj_VXuTarLn2ImxztpMi5belYreCymAOi-XZYMPtIckmev57GjhgLvL8Y_96ioQLOMFnWvJjl8OFR7wj--inVh9ynwOfGBykUh2SB5Y4635Ys5TvwE_pXTPh35niA-DeqLBsN--fmswoBnq8WL6DAQ'
+      }
+    })
+      .then(resp => resp.json())
+      .then(resp => this.setState({animals: resp.animals}))
+  }
+  saveCard(card) {
+    const saved = this.state.saved;
+    this.setState({saved: [...saved, card]})
   }
   render() {
     // get types for reference
@@ -18,13 +33,7 @@ class App extends React.Component {
     // })
     //   .then(resp => resp.json())
     //   .then(resp => console.log(resp))
-    fetch('https://api.petfinder.com/v2/animals', {
-      headers: {
-        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImZmODNkMGM5NDQzNzE3ZjdlZDYyYTZmM2ViYWQ0NWRmNTU2YmEwOTVlZDM5NzhkODdiM2MxZWNkZGRjOGJiODQyZGFkZWUwNWZkYzcxNWQwIn0.eyJhdWQiOiJCczZtRjFRY3p5WVg0cjU4OEVWcDdRR1Ywa1prVlJiUjA3ZTFNNXlPYU85Y0p2M0JNSSIsImp0aSI6ImZmODNkMGM5NDQzNzE3ZjdlZDYyYTZmM2ViYWQ0NWRmNTU2YmEwOTVlZDM5NzhkODdiM2MxZWNkZGRjOGJiODQyZGFkZWUwNWZkYzcxNWQwIiwiaWF0IjoxNTYwNDUyMjg1LCJuYmYiOjE1NjA0NTIyODUsImV4cCI6MTU2MDQ1NTg4NSwic3ViIjoiIiwic2NvcGVzIjpbXX0.FMQOmJXRSPoJ_ayQfCNGgprzXet4yQt0wcQvIwpqM2eCUajWNk-RADFWuMo76Y7Yi32hRw7kw1AShO5bv9LKNA5C-jRJMwbGLMIzC7y6MicKFG_kVFtWsQzCi4DQlQDvnKDXh1gWFTn-GNd9se1mEbrdumX-pNeUrS3q1KeLyuc_p376zrOXuLy8UVzm6W0gDNkobVV3X1uH9NVH6zjHUVJenVf5dbgblgu2l6eyutX41RAuf17pknQRDk5pr_Z_ol4dZQ7EUdlYO4l5os2mZK167nJ3VFWWLeG-Ag-sdDUMQuM9FECkmirKuT2R3OCnkEz3BE3hfDXxLZIabklCpA'
-      }
-    })
-      .then(resp => resp.json())
-      .then(resp => this.setState({animals: resp.animals}))
+  
     return (
       <div className="App">
         <h1>Fetch</h1>
@@ -32,10 +41,7 @@ class App extends React.Component {
           <a href='/'>Saved (should be on side as a tab)</a>
           <a href='/'>Search</a>
         </section>
-        <form>
-          <label>Zipcode</label>
-          <input type='text'/>
-        </form>
+        <SearchPage animals={this.state.animals}/>
       </div>
     );
   }
