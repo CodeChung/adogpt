@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
+/*
+    todo
+    -react router
+    -inspohttps://musica-react-app.firebaseapp.com/
+*/
+
 const key = 'Bs6mF1QczyYX4r588EVp7QGV0kZkVRbR07e1M5yOaO9cJv3BMI';
 const secret = '1Lkbt1VjOCxPxEY9X9cb5TRVvNbwnToY3pE0sohN';
 
