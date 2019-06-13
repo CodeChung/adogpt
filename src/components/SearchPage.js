@@ -9,7 +9,7 @@ class SearchPage extends React.Component {
                     <label>Zipcode</label>
                     <input type='text'/>
                 </form>
-                <AnimalList animals={this.props.animals}/>
+                <AnimalList animals={this.props.animals} handleSave={this.props.handleSave}/>
             </section>
         )
     }

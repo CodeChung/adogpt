@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimalCard from './AnimalCard'
+import AnimalCard from './AnimalCard/AnimalCard'
 
 class AnimalList extends React.Component {
     static defaultProps = {
@@ -7,7 +7,7 @@ class AnimalList extends React.Component {
     }
     render() {
         const animals = this.props.animals.map((animal, index) => {
-            return <AnimalCard key={index} animal={animal}/>
+            return <AnimalCard key={index} animal={animal} handleSave={this.props.handleSave}/>
         })
         return (
             <section className='animalList'>

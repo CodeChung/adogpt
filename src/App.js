@@ -1,28 +1,36 @@
 import React from 'react';
-import AnimalList from './components/AnimalList';
 import './App.css';
 import SearchPage from './components/SearchPage';
+import SavedPage from './components/SavedPage';
+import { Route, Link } from 'react-router-dom';
+import dummyList from './dummyData';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      animals: [],
+      animals: dummyList,
       saved: [],
     }
   }
-  componentDidMount() {
-    fetch('https://api.petfinder.com/v2/animals', {
-      headers: {
-        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVjMWE4ZjRkMDA2MTVkNDA2YWQyNjQwMmE2YTVjYTk1NmNjMmVjNDljYjEwNmI5NjUxZmU3M2I4YzgyYmQzODkyM2QzNWVjODJiZWE3NmE2In0.eyJhdWQiOiJTUU96bjlRRUhZUkRsRXAzenphbnNNOWFaSmhwYTNLbFdIMFlTM0RONHQ2R1lYS3czdCIsImp0aSI6ImVjMWE4ZjRkMDA2MTVkNDA2YWQyNjQwMmE2YTVjYTk1NmNjMmVjNDljYjEwNmI5NjUxZmU3M2I4YzgyYmQzODkyM2QzNWVjODJiZWE3NmE2IiwiaWF0IjoxNTYwNDU1MDQ5LCJuYmYiOjE1NjA0NTUwNDksImV4cCI6MTU2MDQ1ODY0OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.GNuyNdT8Bd6St3YeXc0gzUmkJUJUnpU4Aqiadfiai8PJ2qGS_jNXXl1kwPiPrJ3k3J2DROlO93Kfd56YTB1bc-fibQuCyINDdSH8Zu1aX4BDiI12ML7SIw1CGQWP9fkz98d2NNwJoO7xcCEUhEc4vndwFR1exg2IpLsmd5BvgLCDcAtyulfMFjqP1pr4-Y6FIj_VXuTarLn2ImxztpMi5belYreCymAOi-XZYMPtIckmev57GjhgLvL8Y_96ioQLOMFnWvJjl8OFR7wj--inVh9ynwOfGBykUh2SB5Y4635Ys5TvwE_pXTPh35niA-DeqLBsN--fmswoBnq8WL6DAQ'
-      }
-    })
-      .then(resp => resp.json())
-      .then(resp => this.setState({animals: resp.animals}))
-  }
-  saveCard(card) {
-    const saved = this.state.saved;
-    this.setState({saved: [...saved, card]})
+  // IMPLEMENT SEARCH LATER
+  // componentDidMount() {
+  //   fetch('https://api.petfinder.com/v2/animals', {
+  //     headers: {
+  //       Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImEyYjg2ZDJkNDc1NDk4MTE3ZmRjZTU3OTkzMzRjZjlhOTkyYTljOTJiNGNhODM0OTQ2YzI3Y2Y2NzgwYjViZmExYzRlZGNmMzE3NGNlOWQyIn0.eyJhdWQiOiJTUU96bjlRRUhZUkRsRXAzenphbnNNOWFaSmhwYTNLbFdIMFlTM0RONHQ2R1lYS3czdCIsImp0aSI6ImEyYjg2ZDJkNDc1NDk4MTE3ZmRjZTU3OTkzMzRjZjlhOTkyYTljOTJiNGNhODM0OTQ2YzI3Y2Y2NzgwYjViZmExYzRlZGNmMzE3NGNlOWQyIiwiaWF0IjoxNTYwNDU4ODIxLCJuYmYiOjE1NjA0NTg4MjEsImV4cCI6MTU2MDQ2MjQyMSwic3ViIjoiIiwic2NvcGVzIjpbXX0.l6ehnfHetkRepyGbFaHKqaknE3lZIP1c8C3wJAyMHwD2svcwa2mQUtpX_2kWtObowm4UM0jvovcymkrY0mzJo7u7vPYcbj0GNmB6zeGaFFMYKibYs12_JrMDMXjgUCH4kjKcDNYDTA7HWv9p3uyGI6dSCrQz4DER4Akd9EY0z8UAnhxbhhlGLkriFRuOJ0ndne3U7cX9jShzQ6NbPH4sSHmQeTx5F2jBp2hGXxGMg0-aF2CVAEoKzGxrtPupcqSFXZTI3TlPF8zxZkyk9CXxbh0wkcenXJIzgPFs9UGJoFXUtSYPYkAMUBWcD-q4FZmR0Kk7wqmLXEXT4wgtcEOH1Q'
+  //     }
+  //   })
+  //     .then(resp => resp.json())
+  //     .then(resp => this.setState({animals: resp.animals}))
+  // }
+  saveCard = (id) => {
+    console.log(id)
+    if (!this.state.saved.map(animal => animal.id).includes(id)) {
+      const saved = this.state.saved;
+      const card = this.state.animals.find(animal => animal.id === id);
+      this.setState({saved: [...saved, card]})
+    }
+    
   }
   render() {
     // get types for reference
@@ -38,10 +46,11 @@ class App extends React.Component {
       <div className="App">
         <h1>Fetch</h1>
         <section className='navbar'>
-          <a href='/'>Saved (should be on side as a tab)</a>
-          <a href='/'>Search</a>
+          <Link to='/saved'>Saved (should be on side as a tab)</Link>
+          <Link to='/'>Search</Link>
         </section>
-        <SearchPage animals={this.state.animals}/>
+        <Route exact path='/' component={() => <SearchPage animals={this.state.animals} handleSave={this.saveCard}/>}/>
+        <Route path='/saved' component={() => <SavedPage saved={this.state.saved}/>}/>
       </div>
     );
   }
