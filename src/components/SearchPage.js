@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimalList from './AnimalList';
+import AnimalList from './AnimalList/AnimalList';
 
 class SearchPage extends React.Component {
     render() {

@@ -1,0 +1,11 @@
+.card {
+    text-align: left;
+}
+.card a {
+    color: #FFF;
+    text-decoration: none;
+}
+.card-image {
+    height: 300px;
+    overflow: hidden;
+}

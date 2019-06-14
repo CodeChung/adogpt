@@ -1,5 +1,6 @@
 import React from 'react';
-import AnimalCard from './AnimalCard/AnimalCard'
+import AnimalCard from '../AnimalCard/AnimalCard'
+import './AnimalList.css';
 
 class AnimalList extends React.Component {
     static defaultProps = {
