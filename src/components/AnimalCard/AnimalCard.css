@@ -1,5 +1,11 @@
+.animal-card {
+    width: 300px;
+    height: auto;
+    margin: 10px;
+}
 .card {
     text-align: left;
+    width: 300px;
 }
 .card a {
     color: #FFF;

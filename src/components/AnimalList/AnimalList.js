@@ -11,7 +11,7 @@ class AnimalList extends React.Component {
             return <AnimalCard key={index} animal={animal} handleSave={this.props.handleSave}/>
         })
         return (
-            <section className='animalList'>
+            <section className='animal-list'>
                 {animals}
             </section>
         )
