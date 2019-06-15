@@ -14,7 +14,7 @@ class AnimalCard extends React.Component {
             <div className='animal-card'>
                 <div className='card' onClick={() => this.setState({active: true})}>
                     <div className='card-image'>
-                        <img src={photo && photo.large ? photo.large : '' } alt='pet' className='img-responsive'></img>
+                        <img src={photo && photo.large ? photo.large : 'https://cdn.pixabay.com/photo/2017/05/20/15/37/dog-2329172_1280.png' } alt='pet' className='img-responsive'></img>
                     </div>
                     <div className='card-header'>
                         <div className={name.length < 20 ? 'card-title h3' : 'card-title h4'}>{name}</div>
@@ -23,10 +23,10 @@ class AnimalCard extends React.Component {
                     </div>
                 </div>
                 <div className={ this.state.active ? 'modal active' : 'modal' } id="modal-id">
-                <a href="#close" className="modal-overlay" aria-label="Close" onClick={() => this.setState({active: false})}></a>
+                <a href="#close" className="modal-overlay" aria-label="Close" onClick={() => this.setState({active: false})}> </a>
                     <div className="modal-container">
                         <div className="modal-header">
-                            <a href="#close" className="btn btn-clear float-right" aria-label="Close" onClick={() => this.setState({active: false})}></a>
+                            <a href="#close" className="btn btn-clear float-right" aria-label="Close" onClick={() => this.setState({active: false})}> </a>
                             <div className="modal-title h5">{name}</div>
                         </div>
                         <div className="modal-body">
