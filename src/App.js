@@ -33,18 +33,8 @@ class App extends React.Component {
         this.setState({accessToken: respJson.access_token})
       })
       .catch(err => alert(err))
-      .then(() => {
-        fetch("https://api.petfinder.com/v2/types/cat/breeds", {
-      headers: {
-        Authorization: `Bearer ${this.state.accessToken}`
-      }
-    })
-      .then(resp => resp.json())
-      .then(resp => console.log(resp))
-      })
   }
   saveCard = (id) => {
-    console.log(id)
     if (!this.state.saved.map(animal => animal.id).includes(id)) {
       const saved = this.state.saved;
       const card = this.state.animals.find(animal => animal.id === id);
@@ -75,11 +65,12 @@ class App extends React.Component {
       <div className="App">
         <h1>Fetch</h1>
         <section className='navbar'>
-          <Link to='/saved'>Saved (should be on side as a tab)</Link>
-          <Link to='/'>Search</Link>
+          <Link to='/saved'><button className='btn'>Saved</button></Link>
+          <Link to='/'><button className='btn'>Search</button></Link>
         </section>
         <Route exact path='/' component={() => <SearchPage animals={this.state.animals} handleSave={this.saveCard} handleSearch={this.searchAnimals}/>}/>
         <Route path='/saved' component={() => <SavedPage saved={this.state.saved}/>}/>
+        
       </div>
     );
   }
