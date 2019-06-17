@@ -42,29 +42,33 @@ class SearchPage extends React.Component {
         return (
             <section className='search-page'>
                 <form>
-                    <label htmlFor='animal-input'>I'm looking for </label>
+                    <label htmlFor='animal-input'>I'm looking for a </label>
                     <select name='animal-input' id='animal-input' onChange={(e) => this.setOption('type', e.target.value)}>
                         <option value=''>Any</option>
                         <option value='dog'>Dog</option>
                         <option value='cat'>Cat</option>
                     </select> 
-                    <label htmlFor='zipcode'> Near</label>
-                    <input name='zipcode' id='zipcode' type='text' onChange={(e) => {this.setOption('zipcode', e.target.value)}} placeholder='zipcode'/>
-                    <label htmlFor='gender'>Gender</label>
-                    <select name='gender' id='gender' onChange={(e) => this.setOption('gender', e.target.value)}>
-                        <option value=''>Any</option>
-                        <option value='male'>Male</option>
-                        <option value='female'>Female</option>
-                    </select>
-                    <label htmlFor='age'>Age</label>
-                    <select name='age' id='age' onChange={(e) => this.setOption('age', e.target.value)}>
-                        <option value=''>Any</option>
-                        <option value='baby'>Baby</option>
-                        <option value='young'>Young</option>
-                        <option value='adult'>Adult</option>
-                        <option value='senior'>Senior</option>
-                    </select>
-                    
+                    <label htmlFor='zipcode'> near </label>
+                    <input name='zipcode' id='zipcode' type='text' onChange={(e) => {
+                        this.setOption('location', e.target.value)
+                        this.setOption('distance', 50)
+                    }} placeholder='zipcode'/>
+                    <div className='search-options'>
+                        <label htmlFor='gender'>Gender</label>
+                        <select name='gender' id='gender' onChange={(e) => this.setOption('gender', e.target.value)}>
+                            <option value=''>Any</option>
+                            <option value='male'>Male</option>
+                            <option value='female'>Female</option>
+                        </select>
+                        <label htmlFor='age'>Age</label>
+                        <select name='age' id='age' onChange={(e) => this.setOption('age', e.target.value)}>
+                            <option value=''>Any</option>
+                            <option value='baby'>Baby</option>
+                            <option value='young'>Young</option>
+                            <option value='adult'>Adult</option>
+                            <option value='senior'>Senior</option>
+                        </select>
+                    </div>
                     <div className='breed-section'>
                         <label htmlFor='breed'>Breed</label>
                         <input name='breed' id='breed' type='text' value={this.state.params.breed}
@@ -76,7 +80,7 @@ class SearchPage extends React.Component {
                     </div>
 
                    
-                    <button onClick={e => {
+                    <button className='btn btn-lg' onClick={e => {
                         e.preventDefault();
                         this.props.handleSearch(this.state.params)
                     }}>Find!</button>

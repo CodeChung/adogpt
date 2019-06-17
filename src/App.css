@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: rgb(255, 255, 255);
+  padding-top: 20px;
 }
 
 .App-logo {
@@ -24,3 +25,15 @@
   color: #61dafb;
 }
 
+form {
+  padding: 20px;
+  line-height: 30px;
+}
+
+form button {
+  margin-top: 20px;
+}
+
+.saved-animals {
+  padding-top: 30px;
+}

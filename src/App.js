@@ -46,6 +46,7 @@ class App extends React.Component {
     const endpoint = 'https://api.petfinder.com/v2/animals?';
     const query = Object.keys(queryState).filter(key => queryState[key]).map(key => `${key}=${queryState[key]}`).join('&');
     const url = endpoint + query;
+    console.log(url);
     fetch(url, {
       headers: {
         Authorization: `Bearer ${this.state.accessToken}`
@@ -64,9 +65,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Fetch</h1>
-        <section className='navbar'>
-          <Link to='/saved'><button className='btn'>Saved</button></Link>
-          <Link to='/'><button className='btn'>Search</button></Link>
+        <section className='navbar-center'>
+          <Link to='/saved'><button className='btn btn-lg'>Saved</button></Link>
+          <Link to='/'><button className='btn btn-lg'>Search</button></Link>
         </section>
         <Route exact path='/' component={() => <SearchPage animals={this.state.animals} handleSave={this.saveCard} handleSearch={this.searchAnimals}/>}/>
         <Route path='/saved' component={() => <SavedPage saved={this.state.saved}/>}/>

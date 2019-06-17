@@ -34,9 +34,10 @@ class AnimalCard extends React.Component {
                             <span className='chip'>{age}</span>
                             <p>{description}</p>
                             {characteristics}
-                            <button className='btn' onClick={() => this.props.handleSave(id)}>Save</button>
-                            <a href={url} target='_blank' rel="noopener noreferrer"><button className='btn btn-primary'>Meet</button></a>
-                            {/* {attributes}*/}
+                            <div className='buttons'>
+                                <button className='btn' onClick={() => this.props.handleSave(id)}>Save</button>
+                                <a href={url} target='_blank' rel="noopener noreferrer"><button className='btn btn-primary'>Meet</button></a>
+                            </div>
                         </div>
                         </div>
                         <div className="modal-footer">
