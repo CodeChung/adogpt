@@ -1,6 +1,6 @@
 import React from 'react';
 import AnimalList from './AnimalList/AnimalList';
-import { dogs, cats } from '../breeds';
+import { dogs, cats, both } from '../breeds';
 
 class SearchPage extends React.Component {
     state = {
@@ -12,8 +12,6 @@ class SearchPage extends React.Component {
             location: '',
             distance: 0,
         },
-        dogs: dogs,
-        cats: cats,
         suggestions: [],
     }
     setOption = (option, choice) => {
@@ -23,7 +21,8 @@ class SearchPage extends React.Component {
     }
 
     getSuggestions = (breed) => {
-        const animal = this.state.params.type === 'dog' ? dogs : cats;
+        const type = this.state.params.type;
+        const animal = type === '' ? both : type === 'dog' ? dogs : cats;
         const breeds = animal.breeds.map(breed => breed.name.toLowerCase());
         const breedSearch = breed.trim().toLowerCase();
         const searchLength = breedSearch.length;
